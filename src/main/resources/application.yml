@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_DB_SERVER_ADDRESS:localhost}:${POSTGRES_DB_SERVER_PORT:5432}/
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:example}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+      format-sql: true
+      type: info
+      use-sql-comments: true
+      properties:
+        hibernate.use_sql_comments: true
+        hibernate.format_sql: true
+
+springdoc:
+  show-actuator: true
+  paths-to-match: /**
+  packages-to-scan: com.wenjel.tikoma
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+logging:
+  level:
+    org.springframework: INFO
+    com.wenjel.tikoma: INFO
+
+## FIXME : Customize JWT token and Swagger information for your application
+
+jwt:
+  secretKey: secret
+  issuer: www.wenjel.tikoma.com
+  expirationMinute: 10
+
+swagger:
+  contact-name: Miniyahil Kebede
+  contact-mail: omer@wenjel.tikoma.com
+  contact-url: https://wenjel.tikoma.com
+  app-name: Wenjel Tikoma
+  app-description: "Wenjel Tikoma"
+  app-version: 2.0.0
+  app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  app-license: Apache 2.0
